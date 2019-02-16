@@ -6,3 +6,34 @@
     @include box_flex;
     @include direction(column);
 }
+
+section {
+    width: 100%;
+    height: 100%;
+    @include flex;
+    @include sizing;
+    .box {
+        width: 100%;
+        height: pxTorem(300px);
+        >img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+    .box1 {
+        button {
+            margin-left: pxTorem(30px);
+            width: 80%;
+            height: pxTorem(44px);
+            border: 1px solid red;
+            border-radius: pxTorem(44px);
+            background: #fff;
+            color: red;
+        }
+        span {
+            margin-left: 45%;
+            font-size: pxTorem(14px);
+            border-bottom: 1px solid #ccc;
+        }
+    }
+}
