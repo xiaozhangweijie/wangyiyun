@@ -4,6 +4,7 @@ var server = require("gulp-webserver");
 var uglify = require("gulp-uglify");
 var babel = require("gulp-babel");
 var clean = require("gulp-clean-css");
+var concat = require("gulp-concat");
 var minImg = require("gulp-imagemin");
 var minHtml = require("gulp-htmlmin");
 var path = require("path");
@@ -13,8 +14,13 @@ var list = require("./data.json");
 gulp.task("minScss", function() {
     return gulp.src("./src/scss/*.scss")
         .pipe(sass())
-        .pipe(clean())
+        .pipe(concat("all.css"))
         .pipe(gulp.dest("./src/css/"))
+})
+gulp.task("devJs", function() {
+    return gulp.src("./src/js/*.js")
+        .pipe(concat("all.js"))
+        .pipe(gulp.dest("./src/js/"))
 })
 gulp.task("server", function() {
     return gulp.src("./src")
@@ -42,6 +48,7 @@ gulp.task("server", function() {
 })
 gulp.task("watch", function() {
     gulp.watch("./src/scss/*.scss", gulp.series("minScss"))
+    gulp.watch("./src/js/*.js", gulp.series("devJs"))
 })
 gulp.task("dev", gulp.series("minScss", "server", "watch"))
     //压缩js
